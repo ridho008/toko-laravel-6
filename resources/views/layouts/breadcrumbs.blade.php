@@ -21,4 +21,7 @@
             </div>
         </div>
     </div>
+@include('admin.partials.flash')
 </div>
+
+

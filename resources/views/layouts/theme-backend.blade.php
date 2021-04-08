@@ -39,7 +39,7 @@
                         <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
                     <li>
-                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Category </a>
+                        <a href="{{ route('categories.index') }}"><i class="menu-icon fa fa-laptop"></i>Category </a>
                     </li>
                     <li class="menu-title">UI elements</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -160,6 +160,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script>
+    $('.delete').on('submit', function() {
+    return confirm("Do you want to remove this ?")
+  })
+</script>
 
 
 </body>
