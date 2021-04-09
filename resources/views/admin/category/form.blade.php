@@ -1,8 +1,10 @@
 @extends('layouts.theme-backend')
 
 @if(!empty($category))
+@section('title', 'Edit Category')
 @section('title-bread', 'Edit Category')
 @else
+@section('title', 'Add Category')
 @section('title-bread', 'Add Category')
 @endif
 

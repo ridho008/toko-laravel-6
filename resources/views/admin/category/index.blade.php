@@ -1,5 +1,6 @@
 @extends('layouts.theme-backend')
 
+@section('title', 'Category')
 @section('title-bread', 'Category')
 @section('content')
 <div class="row">
