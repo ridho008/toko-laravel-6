@@ -35,6 +35,9 @@ class CategoryController extends Controller
     public function create()
     {
       // this->data undifined, artinya tidak ada variabel data yang didefenisikan di halaman create. maka dari itu akan di defenisikan di halaman Controller.php sehingga bisa digunakan dimana saja.
+        $categories = Category::orderBy('name', 'asc')->get();
+        $this->data['categories'] = $categories->toArray();
+        $this->data['category'] = null;
         return view('admin.category.form', $this->data);
     }
 
@@ -63,7 +66,7 @@ class CategoryController extends Controller
         $params = $request->except('_token');
         // dd($params);
         $params['slug'] = Str::slug($params['name']);
-        $params['parent_id'] = 0;
+        $params['parent_id'] = (int) $params['parent_id'];
         if(Category::create($params)) {
             session()->flash('success', 'Category has been saved');
             return redirect()->route('categories.index');
@@ -91,6 +94,9 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $this->data['category'] = $category;
+        
+        $categories = Category::orderBy('name', 'asc')->get();
+        $this->data['categories'] = $categories->toArray();
         return view('admin.category.form', $this->data);
     }
 
