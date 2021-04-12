@@ -35,7 +35,7 @@
                <td>{{ $key + $categories->firstitem() }}</td>
                <td>{{ $category->name }}</td>
                <td>{{ $category->slug }}</td>
-               <td>{{ $category->parent ? $category->parent->name : '' }}</td>
+               <td>{{ $category->parent ? $category->parent->name : 'Head' }}</td>
                <td>
                   <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-xs">Edit</a>
                   {!! Form::open(['url' => 'admin/categories/'.$category->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
