@@ -25,8 +25,8 @@ class ProductRequest extends FormRequest
     {
         // jika klik ubah data
         if($this->method() == 'PUT') {
-            $sku = 'required|unique:products,sku'. $this->get('id');
-            $name = 'required|unique:products,name'. $this->get('id');
+            $sku = 'required|unique:products,sku,'. $this->get('id');
+            $name = 'required|unique:products,name,'. $this->get('id');
         } else {
             // jika tambah data
             $sku = 'required|unique:products,sku';
