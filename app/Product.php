@@ -18,6 +18,12 @@ class Product extends Model
       return $this->belongsToMany('App\Category', 'product_categories');
    }
 
+   public function productImages()
+   {
+      // relasi 1 product mempunyai banyak gambar
+      return $this->hasMany('App\ProductImage');
+   }
+
    public static function statuses()
    {
       return [

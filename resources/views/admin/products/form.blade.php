@@ -9,7 +9,10 @@
 
 @section('content')
 <div class="row">
-   <div class="col-md-12">
+  <div class="col-md-4">
+    @include('admin.products.menus')
+  </div>
+   <div class="col-md-8">
       <div class="card">
          <div class="card-header"><h6>{{ $formTitle }} Category</h6></div>
          <div class="card-body">
