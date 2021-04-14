@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
    Route::resource('categories', 'CategoryController');
    Route::resource('products', 'ProductController');
+   Route::resource('attributes', 'AttributeController');
 
    Route::get('products/{productID}/images', 'ProductController@images');
    Route::get('products/{productID}/add_image', 'ProductController@add_image');

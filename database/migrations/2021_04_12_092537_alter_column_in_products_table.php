@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// mengubah type field, misalnya dari tidak nullable menjadi nullable
 class AlterColumnInProductsTable extends Migration
 {
     /**
