@@ -38,6 +38,7 @@
                <td>{{ $attribute->type }}</td>
                <td>
                   <a href="{{ route('attributes.edit', $attribute->id) }}" class="btn btn-info btn-xs">Edit</a>
+                  <a href="{{ url('admin/attributes/'. $attribute->id. '/options') }}" class="btn btn-success btn-xs">Options</a>
                   {!! Form::open(['url' => 'admin/attributes/'.$attribute->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
                   {!! Form::hidden('_method', 'DELETE') !!}
                   {!! Form::submit('remove', ['class' => 'btn btn-danger btn-xs']) !!}

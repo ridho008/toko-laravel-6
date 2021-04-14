@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 // use Illuminate\Http\Request;
 use App\Http\Requests\AttributeRequest;
+use App\Http\Requests\AttributeOptionRequest;
 
 use App\Attribute;
-use App\AttributeOptions;
+use App\AttributeOption;
 
 class AttributeController extends Controller
 {
@@ -127,5 +128,61 @@ class AttributeController extends Controller
         }
 
         return redirect()->route('attributes.index');
+    }
+
+    public function options($attributeID)
+    {
+        // if(empty($AttributeID)) {
+        //     return redirect()->route('attributes.index');
+        // }
+
+        $attribute = Attribute::findOrFail($attributeID);
+        $this->data['attribute'] = $attribute;
+
+        return view('admin.attributes.options', $this->data);
+    }
+
+    public function store_option(AttributeOptionRequest $request, $attributeID)
+    {
+        $params = [
+            'attribute_id' => $attributeID,
+            'name' => $request->get('name'),
+        ];
+
+        if(AttributeOption::create($params)) {
+            session()->flash('success', 'Option has been saved.');
+        }
+
+        return redirect()->to('admin/attributes/'. $attributeID .'/options');
+    }
+
+    public function edit_option($optionID)
+    {
+        $attributeOption = AttributeOption::findOrFail($optionID);
+        $this->data['attributeOption'] = $attributeOption;
+        $this->data['attribute'] = $attributeOption->attribute;
+        return view('admin.attributes.options', $this->data);
+    }
+
+    public function update_option(AttributeOptionRequest $request, $optionID)
+    {
+        $attributeOption = AttributeOption::findOrFail($optionID);
+        $params = $request->except('_token');
+
+        if($attributeOption->update($params)) {
+            session()->flash('success', 'Option has been updated.');
+        }
+
+        return redirect()->to('admin/attributes/'. $attributeOption->attribute->id .'/options');
+    }
+
+    public function remove_option($optionID)
+    {
+        $attributeOption = AttributeOption::findOrFail($optionID);
+        if($attributeOption->delete()) {
+            session()->flash('success', 'Option has been deleted.');
+        }
+
+        return redirect()->to('admin/attributes/'. $attributeOption->attribute->id .'/options');
     }
 }
