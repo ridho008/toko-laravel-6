@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']], function() {
    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-   Route::resource('categories', 'CategoryController');
    Route::resource('products', 'ProductController');
+   Route::resource('categories', 'CategoryController');
 
    Route::get('products/{productID}/images', 'ProductController@images');
    Route::get('products/{productID}/add_image', 'ProductController@add_image');
@@ -34,5 +34,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
    Route::put('attributes/options/{attributID}', 'AttributeController@update_option');
 });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+

@@ -21,9 +21,10 @@
                </tr>
              </thead>
              <tbody>
-               @forelse($attribute->attributeOptions as $option)
+              @php $no = 1; @endphp
+               @forelse($attribute->attributeOptions as $key => $option)
                   <tr>
-                    <td>{{ $option->id }}</td>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $option->name }}</td>
                     <td>
                       <a href="{{ url('admin/attributes/options/' . $option->id. '/edit') }}" class="btn btn-xs btn-info">Edit</a>

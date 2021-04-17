@@ -9,6 +9,7 @@ use App\Http\Requests\ProductImageRequest;
 use App\Product;
 use App\ProductImage;
 use App\Category;
+use App\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -25,6 +26,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->data['statuses'] = Product::statuses();
+        $this->data['types'] = Product::types();
     }
 
     public function index()
@@ -41,11 +43,19 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name', 'asc')->get();
+        $configurableAttributes = $this->getCongurableAttributes();
+
+        $this->data['configurableAttributes'] = $configurableAttributes;
         $this->data['categories'] = $categories->toArray();
         $this->data['product'] = null;
         $this->data['categoryIDs'] = [];
         $this->data['productID'] = 0;
         return view('admin.products.form', $this->data);
+    }
+
+    public function getCongurableAttributes()
+    {
+        return Attribute::where('is_configurable', '1')->get();
     }
 
     /**

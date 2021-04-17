@@ -6,7 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-   protected $fillable = ['user_id', 'sku', 'name', 'slug', 'price', 'weight', 'length', 'width', 'height', 'short_description', 'description', 'status'];
+   protected $fillable = ['user_id', 'sku', 'name', 'slug', 'price', 'weight', 'length', 'width', 'height', 'short_description', 'description', 'status', 'parent_id', 'type'];
+
+   public function variants()
+   {
+      return $this->hasMany('App\Product', 'parent_id');
+   }
+
+   public function parent()
+   {
+      return $this->belongsTo('App\Product', 'parent_id');
+   }
+
+   public function productAttributeValues()
+   {
+      return $this->hasMany('App\ProductAttributeValues');
+   }
+
+   public function productInventory()
+   {
+      return $this->hasOne('App\ProductInventory');
+   }
 
    public function user()
    {
@@ -30,6 +50,14 @@ class Product extends Model
          0 => 'draft',
          1 => 'active',
          2 => 'inactive',
+      ];
+   }
+
+   public static function types()
+   {
+      return [
+         'simple' => 'Simple',
+         'configurable' => 'Configurable',
       ];
    }
 }

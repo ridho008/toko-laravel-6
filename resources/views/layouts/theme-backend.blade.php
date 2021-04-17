@@ -1,8 +1,5 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,13 +36,13 @@
                     <li>
                         <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li>
+                    <li class="{{ (Request::path() == 'admin/attributes') ? ' active' : '' }}">
                         <a href="{{ route('attributes.index') }}"><i class="menu-icon fa fa-laptop"></i>Attributes </a>
                     </li>
-                    <li>
+                    <li class="{{ (Request::path() == 'admin/categories') ? ' active' : '' }}">
                         <a href="{{ route('categories.index') }}"><i class="menu-icon fa fa-laptop"></i>Category </a>
                     </li>
-                    <li>
+                    <li class="{{ (Request::path() == 'admin/products') ? ' active' : '' }}">
                         <a href="{{ route('products.index') }}"><i class="menu-icon fa fa-laptop"></i>Products </a>
                     </li>
                     {{-- <li class="menu-item-has-children dropdown">
@@ -147,6 +144,7 @@
 <!-- Right Panel -->
 
 <!-- Scripts -->
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
@@ -154,8 +152,26 @@
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
     $('.delete').on('submit', function() {
-    return confirm("Do you want to remove this ?")
-  })
+        return confirm("Do you want to remove this ?");
+    });
+
+    function showHideConfigurableAttributes()
+    {
+        const productType = $('.product-type').val();
+
+        if(product-type == 'configurable') {
+            $('.configurable-attributes').show();
+        } else {
+            $('.configurable-attributes').hide();
+        }
+    }
+
+    $(function() {
+        showHideConfigurableAttributes();
+        $('.product-type').change(function() {
+            showHideConfigurableAttributes();
+        });
+    });
 </script>
 
 
